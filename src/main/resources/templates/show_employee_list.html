@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Show contacts</title>
+</head>
+
+<body>
+	<section>
+		<div class="card mr-3 ml-3">
+			<div class="card-body">
+				<div class="container text-center">
+					<a class="btn btn-outline-secondary" th:href="@{/}">Home</a> <a
+						class="btn btn-outline-primary" th:href="@{/add-employee}">Add
+						Employee</a>
+				</div>
+
+				<h1 class="text-center">Employee List</h1>
+				<!--Adding Search bar-->
+				<div class="search-container my-4">
+					<input onkeyup="search()" id="search-input" type="text"
+						class="form-control" placeholder="Search your employee..." />
+					<div class="search-result">
+						<!--Result goes here-->
+					</div>
+				</div>
+				<!--End of Search bar-->
+
+				<div e></div>
+				<table class="table">
+					<thead class="thead-dark">
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Mobile Number</th>
+							<th scope="col">Salary</th>
+							<th scope="col">Age</th>
+							<th scope="col">Department Name</th>
+							<th scope="col">Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="e : ${employees}">
+							<th scope="row" th:text="${e.empId}"></th>
+							<td th:text="${e.empName}"></td>
+							<td th:text="${e.emailId}"></td>
+							<td th:text="${e.mobileNo}"></td>
+							<td th:text="${e.empSalary}"></td>
+							<td th:text="${e.empAge}"></td>
+							<td th:text="${e.department.deptName}"></td>
+
+							<td><a href="#" th:href="@{'/delete-employee/'+${e.empId}}"
+								class="btn btn-danger btn-sm">Delete</a>
+
+								<form method="post"
+									th:action="@{'/update-employee/'+${e.empId}}" class="mt-2">
+									<button type="submit" class="btn btn-primary btn-sm">Update</button>
+								</form></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+</body>
+</html>

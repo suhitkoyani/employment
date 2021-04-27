@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Add Contact</title>
+
+
+</head>
+<body>
+	<section>
+		<div class="card text-center">
+			<div class="card-body mr-3 ml-3">
+
+				<h1 class="text-center">Add Employee</h1>
+				<div class="container-fluid mt-1">
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+
+							<form novalidate action="#" th:object="${employee}" method="POST"
+								th:action="@{/add-employee}" class="mt-2">
+
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<div class="input-group-text">Name</div>
+									</div>
+									<input type="text" id="empName" name="empName"
+										th:value="${employee.empName}"
+										th:classappend="${#fields.hasErrors('empName') ? 'is-invalid' : ''}"
+										placeholder="Enter your name" class="form-control" required />
+									<div class="invalid-feedback"
+										th:each="e : ${#fields.errors('empName')}" th:text="${e}"
+										id="empName"></div>
+								</div>
+
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">Email</div>
+									</div>
+									<input type="email" id="emailId" name="emailId"
+										th:value="${employee.emailId}"
+										th:classappend="${#fields.hasErrors('emailId') ? 'is-invalid' : ''}"
+										placeholder="Enter your email address" class="form-control"
+										required />
+									<div class="invalid-feedback"
+										th:each="e : ${#fields.errors('emailId')}" th:text="${e}"
+										id="emailId"></div>
+								</div>
+
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">Mobile number</div>
+									</div>
+									<input type="number" id="mobileNo" name="mobileNo"
+										th:value="${employee.mobileNo}"
+										th:classappend="${#fields.hasErrors('mobileNo') ? 'is-invalid' : ''}"
+										placeholder="Enter your mobile no." class="form-control"
+										min="10" max="10" required />
+									<div class="invalid-feedback"
+										th:each="e : ${#fields.errors('mobileNo')}" th:text="${e}"
+										id="mobileNo"></div>
+								</div>
+
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">Salary</div>
+									</div>
+									<input type="number" id="empSalary" name="empSalary"
+										th:value="${employee.empSalary}"
+										placeholder="Enter your salary" class="form-control" required />
+								</div>
+
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">Age</div>
+									</div>
+									<input type="number" id="empAge" name="empAge"
+										th:value="${employee.empAge}" placeholder="Enter your age"
+										class="form-control" required />
+								</div>
+
+								<div class="input-group mt-3">
+									<div class="input-group-prepend">
+										<div class="input-group-text">Status</div>
+									</div>
+									<input type="text" id="status" name="status"
+										th:value="${employee.status}" placeholder="Enter your status"
+										class="form-control" required />
+								</div>
+
+								<div class="input-group mt-3" th:object="${departmentList}">
+									<div class="input-group-prepend">
+										<div class="input-group-text">Department</div>
+									</div>
+									<select class="custom-select" id="deptId" name="deptId"
+										th:value="${employee.deptId}" required>
+										<option th:each="department: ${departmentList}"
+											th:value="${department.deptId}"
+											th:text="${department.deptName}"></option>
+									</select>
+								</div>
+
+								<div class="container text-center mt-3">
+									<button class="btn btn-outline-success">Save Employee</button>
+									<a class="btn btn-outline-danger" th:href="@{/}">Cancel</a>
+								</div>
+
+							</form>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+
+</body>
+</html>
+
